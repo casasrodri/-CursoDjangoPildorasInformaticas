@@ -1,0 +1,64 @@
+<html>
+    <body>
+        <h3 style="color: green">
+            Hola a todos! este es el primer Template en Django.
+        </h3>
+
+        <p>El alumno se llama: {{nombre_persona}}</p>
+        <p>La alumna se llama: {{persona.nombre}} {{persona.apellido.upper}}</p>
+
+        <p>{{semestre}}</p>
+
+        <!-- Se usa el arr.# en lugar del arr[#] para acceder al elemento: -->
+        <p>{{semestre.1}}</p>
+
+        <p><b>Listado de meses del semetre:</b></p>
+        <ol>
+            {% for mes in semestre %}
+                <li>{{mes}}</li>
+            {% endfor %}
+        </ol>
+
+        {# NO TEMAS DISEÑADOR, IGNORA ESTA PARTE #}
+
+        {% comment %}
+        Este es un comentario
+        que ocupa varias lineas.
+        Adiós :D
+        {% endcomment %}
+
+
+
+        {% if dias %}
+            {% for dia in dias %}
+                <p>{{dia}}</p>
+            {% endfor %}
+        {% else %}
+            <p>La lista de d&iacute;as se encuentra vac&iacute;a.</p>
+        {% endif %}
+
+
+
+        <p>Fecha actual: {{now_formateado}} (es decir, el d&iacute;a {{now.day}} del mes)</p>
+
+
+
+        {% if nombre_persona == 'Rodri' %}
+            <p>El <b>mejor</b> alumno se llama: {{nombre_persona}}</p>
+        {% else %}
+            <p>El alumno se llama: {{nombre_persona}}</p>
+        {% endif %}
+
+
+        {# USO DE FILTROS #}
+        <p>La alumna se llama: {{persona.apellido|upper}}, {{persona.nombre}}</p>
+
+
+        {# FILTRO: first (en este ejemplo, solo la primera letra) #}
+        <ol>
+            {% for mes in semestre %}
+                <li>{{ mes|first|upper }}</li>
+            {% endfor %}
+        </ol>
+    </body>
+</html>
