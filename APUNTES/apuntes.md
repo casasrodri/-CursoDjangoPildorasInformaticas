@@ -264,3 +264,46 @@ admin.site.register(Clientes)
 ```
 
 Para hacer que un campo no sea requerido obligatoriamente, es decir, que sea opcional (se denota sin negrita en el panel de admin), se debe cambiar en el modelo, el argumento del campo, especificando `blank=True, null=True`. Y luego hacer todas las migraciones.
+
+## Clase 18
+
+**Cambiar los nombre de los campos en el panel de administración:**
+En `models.py` hay que agregar el kwarg `verbose_name=` al constructor de cada campo.
+O se puede agregar como primer parámetro, pero no es recomendable porque genera conflictos cuando son campos que se usan como clave foránea o se usan para relación de muchos a muchos.
+
+Si queremos ver más campos en la tabla del panel de administración, se deberá agregar en el archivo `admin.py`, una clase nueva que herede `admin.ModelAdmin`.
+
+Ejemplo:
+
+```python
+class ClienteAdmin(admin.ModelAdmin):
+    list_display=('nombre', 'direccion', 'telefono')
+
+# Y luego se registra junto a la clase del modelo
+admin.site.register(Clientes, ClienteAdmin)
+```
+
+Si queremos tener un buscador, se deberá agregar en el archivo `admin.py`, en la clase que hereda `admin.ModelAdmin`, lo siguiente:
+
+```python
+    ...
+    search_fields=('nombre','telefono')
+```
+
+## Clase 19
+
+Si queremos tener un filtro, se deberá agregar en el archivo `admin.py`, en la clase que hereda `admin.ModelAdmin`, lo siguiente:
+
+```python
+class ArticuloAdmin(admin.ModelAdmin):
+    list_filter=('seccion')
+```
+
+Si es un campo fecha, se puede agregar como un timeline. Usando la siguiente variable:
+
+```python
+class PedidoAdmin(admin.ModelAdmin):
+    date_hierarchy='fecha'
+```
+
+QUEDO EN [ESTE PUNTO](https://youtu.be/DVOAjMuM4vM?t=650)

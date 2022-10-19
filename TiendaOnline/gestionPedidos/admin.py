@@ -2,11 +2,22 @@ from django.contrib import admin
 
 # Register your models here.
 
-from gestionPedidos.models import Clientes
-admin.site.register(Clientes)
+from gestionPedidos.models import Clientes, Articulos, Pedidos
 
-from gestionPedidos.models import Articulos
-admin.site.register(Articulos)
+# Para ver más campos en la vista del administrador:
 
-from gestionPedidos.models import Pedidos
-admin.site.register(Pedidos)
+
+class ClienteAdmin(admin.ModelAdmin):
+    list_display=('nombre', 'direccion', 'telefono')
+    search_fields=('nombre','direccion')
+
+class ArticuloAdmin(admin.ModelAdmin):
+    list_filter=('categoria',)
+
+class PedidoAdmin(admin.ModelAdmin):
+    date_hierarchy='fecha'
+
+# Registramos las clases en el sitio
+admin.site.register(Clientes, ClienteAdmin)
+admin.site.register(Articulos, ArticuloAdmin)
+admin.site.register(Pedidos,PedidoAdmin)
