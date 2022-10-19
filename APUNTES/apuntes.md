@@ -121,5 +121,146 @@ Para crear la base de datos, se hace:
 Para que dichas migraciones impacten, se debe hacer en 2 partes:
 
 1. Se genere el código SQL correspondiente, haciendo: `py manage.py sqlmigrate gestionPedidos 0001`.
-2. Utilice dicho código SQL para hacer cambios en la base de datos, haciendo:
+2. Utilizar dicho código SQL para hacer cambios en la base de datos, haciendo:
 `py manage.py migrate`.
+
+## Clase 13
+
+Para hacer un CRUD, se debe ingresar a la consola:
+`py manage.py shell` y luego importar el modelo: `from gestionPedidos.models import Articulos`
+
+### Insertar datos
+
+```python
+art = Articulos(nombre='mesa', categoria='decoracion', precio=90)
+
+art.save()
+```
+
+Otra forma:
+
+```python
+Articulos.objects.create(nombre='set de cubiertos', categoria='bazar', precio=120)
+```
+
+### Modificar datos
+
+```python
+art.precio = 1000
+art.save()
+```
+
+O buscando el artículo:
+
+```python
+art2 = Articulos.object.get(id=2)
+art2.nombre= 'set de cubiertos metálicos'
+art.save()
+```
+
+### Eliminar datos
+
+```python
+art3 = Articulos.object.get(id=3)
+art.delete()
+```
+
+### Consultar datos
+
+Todos los datos:
+
+```python
+lista_articulos = Articulos.objects.all()
+
+# Para consultar la query
+lista_articulos.query.__str__()
+```
+
+Usando tipo _where_:
+
+```python
+# Una condición
+lista_articulos = Articulos.objects.filter(categoria='bazar')
+
+# Dos condiciones (AND)
+lista_articulos = Articulos.objects.filter(categoria='bazar', nombre='tenedor')
+
+# Operadores de comparación
+lista_articulos = Articulos.objects.filter(precio__gte=100)
+
+'''
+Puede usarse:
+ gte -> greater or equal
+ gt -> greater
+ lte -> less or equal
+ lt -> less
+
+'''
+```
+
+## Clase 14
+
+Conectando Django con PostgreSQL.
+
+Se debe instalar la libreria _psycopg2_ usando el siguiente comando: `pip install psycopg2`
+
+Luego, en TiendaOnline/settings.py se debe cambiar esta configuración:
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+```
+
+por la siguiente:
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE':   'django.db.backends.postgresql',
+        'NAME':     'TiendaOnlineDjango',
+        'USER':     'postgres',
+        'PASSWORD': 'root',
+        'HOST':     'localhost',
+        'PORT':     '5432',
+    }
+}
+```
+
+## Clase 15
+
+### Ordenar los QuerySets
+
+```python
+# Orden ascendente
+lista_articulos = Articulos.objects.filter(precio__gte=16).order_by('precio')
+
+# Orden descendente
+lista_articulos = Articulos.objects.filter(precio__gte=16).order_by('-precio')
+```
+
+## Clase 16
+
+### Panel de administración
+
+Debe crearse un super-usuario, dado que no viene por defecto.
+
+```bash
+py manage.py createsuperuser
+```
+
+En mi caso es `rodri` y el password `1234`.
+
+## Clase 17
+
+Para registrar un modelo en el panel de administrador, debería agregarse lo siguiente en el archivo `gestionPedidos/admin.py`:
+
+```python
+from gestionPedidos.models import Clientes
+admin.site.register(Clientes)
+```
+
+Para hacer que un campo no sea requerido obligatoriamente, es decir, que sea opcional (se denota sin negrita en el panel de admin), se debe cambiar en el modelo, el argumento del campo, especificando `blank=True, null=True`. Y luego hacer todas las migraciones.
