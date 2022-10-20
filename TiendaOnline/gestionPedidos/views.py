@@ -1,3 +1,5 @@
+import re
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
 from matplotlib.style import context
@@ -11,6 +13,11 @@ def search_product(request):
 def search(request):
 
     producto = request.GET['prd']
+
+    # Validación de longitud (para evitar sobrecargas del sistema)
+    if len(producto) > 20:
+        return HttpResponse('<h1 style="color: red">El texto buscado es demasiado largo. Intente nuevamente ☹</h1>')
+
     if producto == '':
         mensaje = 'No se han ingresado términos en la búsqueda.'
     else:
@@ -38,3 +45,20 @@ def search(request):
     print()
 
     return HttpResponse(mensaje)
+
+def contacto(request):
+    if request.method == 'POST':
+
+        from django.core.mail import send_mail
+        from django.conf import settings
+
+        send_mail(
+            subject= request.POST['asunto'],
+            message= request.POST['mensaje'] + ' ' + request.POST['email'],
+            from_email= settings.EMAIL_HOST_USER,
+            recipient_list= ['cr.rodrigocasas@gmail.com'],
+            fail_silently=False,
+        )
+
+        return HttpResponse('Gracias, hemos recibido su mensaje.')
+    return render(request, 'contacto.html')

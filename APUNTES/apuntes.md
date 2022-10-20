@@ -331,3 +331,22 @@ Crear un formulario, y guardarlo en `templates`.
 Usando un `<form>` que tenga por acción el nombre de una url, que use una vista, y el método `GET`, puedo capturar en la vista el contenido enviado por el request para operar con el.
 
 Ver: [busqueda_articulos.html](../TiendaOnline/gestionPedidos/templates/busqueda_articulos.html), [views.py](../TiendaOnline/gestionPedidos/views.py) y [urls.py](../TiendaOnline/TiendaOnline/urls.py)
+
+## Clase 23
+
+### Envio de emails
+
+Se debe buscar un server que nos permita enviar emails, y los parametros se deben configurar en `settings.py`.
+
+Se deben configurar los siguientes parámetros (usando Gmail):
+
+```python
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'email@gmail.com'
+EMAIL_HOST_PASSWORD = 'password'
+```
+
+Luego para enviar emails, usar de acuerdo con la [documentación de django](https://docs.djangoproject.com/en/4.1/topics/email/).
