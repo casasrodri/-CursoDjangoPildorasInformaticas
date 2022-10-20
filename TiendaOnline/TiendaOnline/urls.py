@@ -19,7 +19,7 @@ from gestionPedidos import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('buscar_prod', views.search_product),
+    path('buscar_producto', views.search_product),
     path('buscar/', views.search),
-    path('contacto', views.contacto)
+    path('contacto', views.contacto_api_form)
 ]

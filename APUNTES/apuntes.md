@@ -350,3 +350,72 @@ EMAIL_HOST_PASSWORD = 'password'
 ```
 
 Luego para enviar emails, usar de acuerdo con la [documentación de django](https://docs.djangoproject.com/en/4.1/topics/email/).
+
+## Clase 24
+
+[Django API Forms](https://docs.djangoproject.com/en/4.1/ref/forms/api/)
+
+En un archivo `forms.py` dentro de la app, generar clases que hereden de `forms.Form`:
+
+```python
+from django import forms
+
+class ContactoForm(forms.Form):
+    asunto = forms.CharField()
+    email = forms.EmailField()
+    mensaje = forms.CharField()
+```
+
+Para probarlo, se puede hacer en la `shell`:
+
+```python
+from gestionPedidos.forms import ContactoForm
+
+cform = ContactoForm()
+print(cform)
+```
+
+Resultado:
+
+```html
+<tr>
+    <th><label for="id_asunto">Asunto:</label></th>
+    <td>
+        <input type="text" name="asunto" required id="id_asunto">
+    </td>
+</tr>
+<tr>
+    <th><label for="id_email">Email:</label></th>
+    <td>
+        <input type="email" name="email" required id="id_email">
+    </td>
+</tr>
+<tr>
+    <th><label for="id_mensaje">Mensaje:</label></th>
+    <td>
+        <input type="text" name="mensaje" required id="id_mensaje">
+    </td>
+</tr>
+```
+
+También se puede imprimir como párrafo `<div>`, `<p>` o lista no ordenada `<ul>`:
+
+```python
+print(cform.as_div())
+print(cform.as_p())
+print(cform.as_ul())
+```
+
+Se puede inicializar con datos el formulario:
+
+```python
+cform = ContactoForm({'asunto': 'Ayuda por favor', 'email': 'a@abc.com', 'mensaje': 'Hola! ...'})
+```
+
+Se puede usar el método `.is_valid()` para corroborar si la información ingresada es válida. Una vez validado, se puede consultar el atributo `.cleaned_data` para que nos devuelva un diccionario con la información del formulario.
+
+## Clase 26
+
+A partir de esta clase se crea un objeto web completo, intentando hacer un blog.
+
+Las notas continuan en: [Proyecto completo](proyecto_completo.md)
