@@ -307,3 +307,27 @@ class PedidoAdmin(admin.ModelAdmin):
 ```
 
 QUEDO EN [ESTE PUNTO](https://youtu.be/DVOAjMuM4vM?t=650)
+
+## Clase 20
+
+### Usuarios
+
+#### Asignación de permisos
+
+**Staff**: permite entrar al panel de administración. Si no es, puede ser que sea necesario un login para cierta parte de la página o algo así, pero no el /admin.
+
+**Activo**: Si el usuario no está activo, no puede loguearse, por lo que no podrá entrar a ciertas páginas.
+
+Los permisos pueden agruparse en grupos, y se asignan a los users... asimismo, se permite asignar puntualmente algunos permisos a los users.
+
+## Clase 21
+
+### Formularios
+
+[Request and response objects](https://docs.djangoproject.com/en/4.1/ref/request-response/)
+
+Crear un formulario, y guardarlo en `templates`.
+
+Usando un `<form>` que tenga por acción el nombre de una url, que use una vista, y el método `GET`, puedo capturar en la vista el contenido enviado por el request para operar con el.
+
+Ver: [busqueda_articulos.html](../TiendaOnline/gestionPedidos/templates/busqueda_articulos.html), [views.py](../TiendaOnline/gestionPedidos/views.py) y [urls.py](../TiendaOnline/TiendaOnline/urls.py)
