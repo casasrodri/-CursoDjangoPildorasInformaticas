@@ -9,8 +9,16 @@ Elemento | Nombre
 Proyecto | ProyectoWeb
 App | proyectoWebApp
 
-Seguí las siguientes instrucciones:
+Para hacerlo, ejecuté las siguientes instrucciones:
 
 ```bash
-...
+django-admin startproject ProyectoWeb
+cd .\ProyectoWeb\
+py manage.py startapp proyectoWebApp
 ```
+
+## Clase 29
+
+Uso de Bootstrap
+
+Descargamos el zip y lo guardamos en `proyectoWebApp/static/proyectoWebApp` a las carpetas `css`, `img` y `vendor`.
