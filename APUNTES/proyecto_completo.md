@@ -44,4 +44,10 @@ MEDIA_URL = '/media'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 ```
 
-QUEDO EN: [video 37](https://www.youtube.com/watch?v=zycSmPlRiVg&list=PLU8oAlHdN5BmfvwxFO7HdPciOCmmYneAB&index=37)
+Luego se debe agregar en el `urls.py` el siguiente código:
+
+```python
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+Me quedé en: [video 43](https://www.youtube.com/watch?v=C8cn-Z-Ps4A&list=PLU8oAlHdN5BmfvwxFO7HdPciOCmmYneAB&index=43)

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles', # Este me permite usar la etiqueta {% load static %}
     'proyectoWebApp',
     'servicios',
+    'blog',
 ]
 
 MIDDLEWARE = [

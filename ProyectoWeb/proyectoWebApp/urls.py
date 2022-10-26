@@ -16,13 +16,13 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+
 from . import views
 
 urlpatterns = [
     # El name= se usa para llamarlos desde los templates.
     path('', views.home, name='home'),
     path('tienda', views.tienda, name='tienda'),
-    path('blog', views.blog, name='blog'),
     path('contacto', views.contacto, name='contacto'),
 ]
 
