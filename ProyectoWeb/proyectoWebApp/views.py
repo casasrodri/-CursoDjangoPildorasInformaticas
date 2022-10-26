@@ -1,11 +1,9 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import HttpResponse, render
+
 
 # Create your views here.
 def home(request):
     return render(request, 'proyectoWebApp/home.html')
-
-def servicios(request):
-    return render(request, 'proyectoWebApp/servicios.html')
 
 def tienda(request):
     return render(request, 'proyectoWebApp/tienda.html')
