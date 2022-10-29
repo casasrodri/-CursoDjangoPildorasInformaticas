@@ -20,7 +20,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # El name= se usa para llamarlos desde los templates.
-    path('', views.home, name='home'),
+    path('', views.tienda, name='tienda'),
 ]
-
