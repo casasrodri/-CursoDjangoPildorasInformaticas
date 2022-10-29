@@ -20,8 +20,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # El name= se usa para llamarlos desde los templates.
-    path('', views.home, name='home'),
-    path('tienda', views.tienda, name='tienda'),
+    path('', views.contacto, name='contacto'),
 ]
 

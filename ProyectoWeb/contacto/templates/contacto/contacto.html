@@ -1,0 +1,37 @@
+{% extends 'proyectoWebApp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1 style="color:azure;">
+  CONTACTO
+</h1>
+
+<div class="contenedorFormulario">
+
+  {% if "valido" in request.GET %}
+    <p style="color: white;">
+      Gracias, se ha enviado correctamente la solicitud.
+    </p>
+
+  {% endif %}
+
+  <form action="" method="POST" style="text-align: center;">
+    {% csrf_token %}
+
+    <table style="color: white; margin: 20px auto;">
+      {{miFormulario.as_table}}
+    </table>
+
+    <input type="submit" value="Enviar" style="width: 150px;">
+  </form>
+</div>
+
+
+{% comment %}
+  <p style="color: white;">
+    {{request.POST}}
+  </p>
+{% endcomment %}
+
+{% endblock %}
