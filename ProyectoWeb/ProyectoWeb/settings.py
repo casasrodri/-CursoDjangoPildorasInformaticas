@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'blog',
     'contacto',
     'tienda',
+    'carrito',
+    'autenticacion',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'carrito.context_processor.importe_total_carrito',
             ],
         },
     },
@@ -139,3 +143,5 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'cr.rodrigo.casas@gmail.com'
 EMAIL_HOST_PASSWORD = open('D:/Rodri/Dev/Python/gmail_password.txt').read()
+
+CRISPY_TEMPLATE_PACK='bootstrap4'

@@ -1,9 +1,33 @@
-{% extends 'proyectoWebApp/base.html' %}
-{% load static %}
+{% extends 'proyectoWebApp/base.html' %} {% load static %} {% block content %}
 
-{% block content %}
-<h1 style="color:azure;">
-  TIENDA (desde la app Tienda)
-</h1>
+<h1 style="color: azure">TIENDA</h1>
+
+<div class="container">
+  <div style="float: right">
+    <p style="color: white">
+      {% include 'carrito/widget.html' %}
+    </p>
+  </div>
+
+  <div class="row">
+    {% for producto in productos%}
+
+    <div class="col-md-3">
+      <div class="card" style="width: 100%; margin: 5px 5px">
+        <img src="{{ producto.imagen.url }}" class="card-img-top" />
+
+        <div class="card-body" style="text-align: center">
+          <h7 class="card-title"> {{ producto.nombre }} </h7>
+          <p class="card-text">$&nbsp;{{ producto.precio }}</p>
+        </div>
+
+        <div class="card-footer text-center">
+          <a href="{% url 'carrito:agregar' producto.id %}" class="btn btn-success">Agregar 🛒</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 
 {% endblock %}
