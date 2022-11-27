@@ -17,9 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from .views import VRegistro, cerrar_sesion
+from .views import VRegistro, cerrar_sesion, loguear
 
 urlpatterns = [
     path('', VRegistro.as_view(), name='autenticacion'),
     path('logout', cerrar_sesion, name='logout'),
+    path('loguear', loguear, name='loguear'),
 ]

@@ -50,4 +50,4 @@ Luego se debe agregar en el `urls.py` el siguiente código:
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ```
 
-Me quedé en: [video 64](https://www.youtube.com/watch?v=dFBhJWH1Ycs&list=PLU8oAlHdN5BmfvwxFO7HdPciOCmmYneAB&index=64)
+Me quedé en: [video 65](https://www.youtube.com/watch?v=zd9Ipe0BTpQ&list=PLU8oAlHdN5BmfvwxFO7HdPciOCmmYneAB&index=65)
