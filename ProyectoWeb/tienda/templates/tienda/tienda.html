@@ -3,11 +3,20 @@
 <h1 style="color: azure">TIENDA</h1>
 
 <div class="container">
-  <div style="float: right">
+
     <p style="color: white">
-      {% include 'carrito/widget.html' %}
+      {% if request.user.is_authenticated %}
+        <div style="float: right">
+          {% include 'carrito/widget.html' %}
+        </div>
+      {% else %}
+        <div class="alert alert-danger text-center">
+          Se debe iniciar sesión para realizar un pedido.
+        </div>
+      {% endif %}
     </p>
-  </div>
+
+
 
   <div class="row">
     {% for producto in productos%}

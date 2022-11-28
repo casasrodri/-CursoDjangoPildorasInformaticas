@@ -5,15 +5,24 @@
 {% block content %}
 
 <h1 style="color:azure;">
-  AUTENTICACION
+  AUTENTICACIÓN
 </h1>
 
 <form method="post" action="" style="color: white">
   {% csrf_token %}
 
   <div style="width: 75%; margin: auto">
+
     {{form|crispy}}
-    <br>
+
+    {% if messages %}
+      {% for msg in messages %}
+      <span class="alert alert-{{msg.tags}}">
+        {{msg}}
+      </span>
+      <br><br>
+      {% endfor %}
+    {% endif %}
     <button type="submit" class="btn btn-success">Login</button>
   </div>
 </form>
