@@ -4,6 +4,9 @@ from .models import Pedido, ItemPedido
 from carrito.carrito import Carrito
 from tienda.models import Producto
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 # Create your views here.
 
@@ -17,9 +20,9 @@ def procesar_pedido(request):
     for k,v in carrito.carrito.items():
         lineas_pedido.append(
             ItemPedido(
-                producto_id = Producto.objects.get(id=k),
+                producto = Producto.objects.get(id=k),
                 cantidad = v['cantidad'],
-                pedido_id = pedido
+                pedido = pedido
             )
         )
 
@@ -32,12 +35,31 @@ def procesar_pedido(request):
         email = request.user.email
     )
 
-    messages.success(request, "El pedido se ha creado correctamente.")
-
     carrito.vaciar()
+
+    messages.success(request, "El pedido se ha creado correctamente.")
 
     return redirect('tienda')
 
-def enviar_email(pedido, lineas_pedido, usuario, email):
-    print(pedido, lineas_pedido, usuario, email)
-    return None
+def enviar_email(**kwargs):
+
+    asunto = "Gracias por su pedido!"
+    mensaje = render_to_string('emails/pedido.html', {
+        "pedido": kwargs.get("pedido"),
+        "lineas_pedido": kwargs.get("lineas_pedido"),
+        "usuario": kwargs.get("usuario"),
+        "email": kwargs.get("email")
+    })
+
+    mensaje_texto = strip_tags(mensaje)
+
+    from_email = "tienda@tienda.com"
+    to_email = kwargs.get("email")
+
+    send_mail(
+        asunto,
+        mensaje_texto,
+        from_email,
+        [to_email],  # type: ignore
+        html_message= mensaje
+    )
